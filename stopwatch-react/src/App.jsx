@@ -1,5 +1,5 @@
-import Stopwatch from "./stopwach/stopwatch";
-
+import Stopwatch from "./stopwatch/stopwatch";
+import { useState } from "react";
 
 function App() {
   const [count, setCount] = useState(0)

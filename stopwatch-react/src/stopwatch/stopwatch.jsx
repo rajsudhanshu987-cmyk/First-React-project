@@ -1,21 +1,50 @@
-import "./stopwach.css";
+import { useState, useRef } from "react";
+import "./stopwatch.css";
 
 const Stopwatch = () => {
+    const [time, setTime] = useState(0);
+    const [isRunning, setIsRunning] = useState(false);
+    const intervalRef = useRef(null);
+
+    const start = () => {
+        if (isRunning) return;
+        setIsRunning(true);
+        intervalRef.current = setInterval(() => {
+            setTime((prev) => prev + 10);
+        }, 10);
+    };
+
+    const stop = () => {
+        setIsRunning(false);
+        clearInterval(intervalRef.current);
+    };
+
+    const reset = () => {
+      stop();
+      setTime(0);
+    };
+
+    const minutes = Math.floor(time / 60000);
+    const seconds = Math.floor((time % 60000) / 1000);
+    const hundredths = Math.floor((time % 1000) / 10);
+
+ const pad = (num) => String(num).padStart(2, "0");
+
     return (
         <div className="stopwatch-container">
             <h1>Stopwatch</h1>
             <div className="stopwatch">
                 <div className="time-display">
-                    <span className="time-unit">0</span>
+                    <span className="time-unit">{pad(minutes)}</span>
                     <span className="colon">:</span>
-                    <span className="time-unit">0</span>
+                    <span className="time-unit">{pad(seconds)}</span>
                     <span className="colon">:</span>
-                    <span className="time-unit">0</span>
+                    <span className="time-unit">{pad(hundredths)}</span>
                 </div>
           
-            <button>Start</button>
-            <button>Stop</button>
-            <button>Reset</button>
+            <button onClick={start}>Start</button>
+            <button onClick={stop}>Stop</button>
+            <button onClick={reset}>Reset</button>
               </div>
         </div>
     );
