@@ -48,6 +48,11 @@ button {
     cursor: pointer;
     border: 2px solid black;
     transition: background 0.3s;
+    button {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
 }
 
 button:hover {

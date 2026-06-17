@@ -1,3 +1,4 @@
+import { FaPlay, FaPause, FaRedo, FaClock } from "react-icons/fa";
 import { motion } from "framer-motion";
 import { useState, useRef } from "react";
 import "./stopwatch.css";
@@ -38,7 +39,7 @@ const Stopwatch = () => {
   animate={{ opacity: 1, y: 0 }}
   transition={{ duration: 0.6 }}
 >
-            <h1>Stopwatch</h1>
+            <h1> <FaClock /> Stopwatch</h1>
             <div className="stopwatch">
                <motion.div
   className="time-display"
@@ -60,7 +61,7 @@ const Stopwatch = () => {
   whileTap={{ scale: 0.9 }}
   onClick={start}
 >
-  Start
+  <FaPlay /> Start
 </motion.button>
 
 <motion.button
@@ -68,7 +69,7 @@ const Stopwatch = () => {
   whileTap={{ scale: 0.9 }}
   onClick={stop}
 >
-  Stop
+  <FaPause /> Stop
 </motion.button>
 
 <motion.button
@@ -76,7 +77,7 @@ const Stopwatch = () => {
   whileTap={{ scale: 0.9 }}
   onClick={reset}
 >
-  Reset
+  <FaRedo /> Reset
 </motion.button>
 </div>
                 </div>
