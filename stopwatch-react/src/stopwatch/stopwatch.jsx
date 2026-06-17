@@ -1,3 +1,4 @@
+import { motion } from "framer-motion";
 import { useState, useRef } from "react";
 import "./stopwatch.css";
 
@@ -31,22 +32,55 @@ const Stopwatch = () => {
  const pad = (num) => String(num).padStart(2, "0");
 
     return (
-        <div className="stopwatch-container">
+       <motion.div
+  className="stopwatch-container"
+  initial={{ opacity: 0, y: -50 }}
+  animate={{ opacity: 1, y: 0 }}
+  transition={{ duration: 0.6 }}
+>
             <h1>Stopwatch</h1>
             <div className="stopwatch">
-                <div className="time-display">
+               <motion.div
+  className="time-display"
+  animate={{ scale: isRunning ? [1, 1.03, 1] : 1 }}
+  transition={{
+    duration: 1,
+    repeat: isRunning ? Infinity : 0
+  }}
+>
                     <span className="time-unit">{pad(minutes)}</span>
                     <span className="colon">:</span>
                     <span className="time-unit">{pad(seconds)}</span>
                     <span className="colon">:</span>
                     <span className="time-unit">{pad(hundredths)}</span>
+                </motion.div>
+         <div className="controls">
+        <motion.button
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.9 }}
+  onClick={start}
+>
+  Start
+</motion.button>
+
+<motion.button
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.9 }}
+  onClick={stop}
+>
+  Stop
+</motion.button>
+
+<motion.button
+  whileHover={{ scale: 1.1 }}
+  whileTap={{ scale: 0.9 }}
+  onClick={reset}
+>
+  Reset
+</motion.button>
+</div>
                 </div>
-          
-            <button onClick={start}>Start</button>
-            <button onClick={stop}>Stop</button>
-            <button onClick={reset}>Reset</button>
-              </div>
-        </div>
+            </motion.div>
     );
 };
 
